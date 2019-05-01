@@ -1,0 +1,3 @@
+"0","housing <- read_csv(""data/landdata-states.csv"")"
+"2","Error: 'data/landdata-states.csv' does not exist in current working directory ('/cloud/project/content/project').
+"

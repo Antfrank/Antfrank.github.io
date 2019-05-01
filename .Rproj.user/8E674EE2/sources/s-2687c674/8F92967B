@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1556721743173.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2861371654",
+    "id" : "8F92967B",
+    "lastKnownWriteTime" : 1556724172,
+    "last_content_update" : 1556724172531,
+    "path" : "/cloud/project/content/project/2019-05-01-atus-survey-analysis.Rmd",
+    "project_path" : "content/project/2019-05-01-atus-survey-analysis.Rmd",
+    "properties" : {
+        "cursorPosition" : "63,26",
+        "last_setup_crc32" : "2687c6743451e336",
+        "scrollLine" : "55"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

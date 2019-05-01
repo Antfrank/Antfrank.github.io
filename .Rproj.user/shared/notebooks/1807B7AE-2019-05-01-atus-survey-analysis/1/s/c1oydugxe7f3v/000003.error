@@ -1,0 +1,1 @@
+{"frames":[],"message":"Error: unexpected symbol in:\n\"ggplot(data = df) + \n  geom_point(aes(x = crime, y = violent crime\"\n"}
