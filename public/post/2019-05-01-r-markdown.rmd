@@ -1,5 +1,5 @@
 ---
-title: My first post
+title: My second Post
 author: 'Anthony Franklin'
 date: '2019-05-01'
 slug: r-markdown
@@ -10,8 +10,6 @@ image:
   focal_point: ''
 ---
 
-# My first post
+# My second post
 
-I'm Jane Doe! I've recently completed the Chromebook Data Science Course Set on Leanpub.
-
-I'm interested in working with data and answering interesting questions
+Chromebook Data Science.

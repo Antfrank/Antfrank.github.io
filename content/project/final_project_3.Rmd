@@ -1,8 +1,15 @@
 ---
-title: "final_project"
-author: "Anthony Franklin"
-date: "8/10/2018"
-output: html_document
+Title: Americans and Time
+author: Anthony Franklin
+date: '2019-05-03'
+slug: atus-survey-analysis
+categories:
+  - data analysis
+tags:
+  - R
+image:
+  caption: ''
+  focal_point: ''
 ---
 
 ```{r setup, include=FALSE}
@@ -49,8 +56,8 @@ Use the first approach explained above to download and access the ATUS data for 
 ### Importing data
 
 ```{r atus-data, warning=FALSE}
-atus.cps <- read.delim('data/raw_data/atuscps_2016.dat', sep=",")
-atus.sum <- read.delim('data/raw_data/atussum_2016.dat', sep=",")
+atus.cps <- read.delim('final_project_data/atuscps_2016.dat', sep=",")
+atus.sum <- read.delim('final_project_data/atussum_2016.dat', sep=",")
 atus.all <- atus.sum %>%
   left_join(atus.cps %>% filter(TULINENO==1), by = c("TUCASEID"))
 ```
@@ -153,10 +160,12 @@ atus.long %>%
 
 ```{r activity-income}
 atus.long %>% 
-  group_by(ACTIVITY, HEFAMINC) %>%
-  ggplot(data = income_activity) +
-  geom_point(aes(x = ACTIVITY, y = HEFAMINC), color = "dodgerblue") +
-  geom_smooth(method = "lm", se= FALSE)
+    group_by(ACTIVITY, HEFAMINC) %>% 
+    summarise(AVGMINS = mean(MINS)) %>% 
+  ggplot( aes(x = ACTIVITY, y = AVGMINS, fill = HEFAMINC)) + 
+  geom_bar(position = "fill",stat = "identity") + 
+  coord_flip()
+
 
   ## add the rest of the code here
 ```

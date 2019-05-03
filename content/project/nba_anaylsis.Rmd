@@ -1,0 +1,46 @@
+---
+Title: NBA Stats
+author: Anthony Franklin
+date: '2019-05-03'
+slug: atus-survey-analysis
+categories:
+  - data analysis
+tags:
+  - R
+image:
+  caption: ''
+  focal_point: ''
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+champs <- read_csv(file = "nba_data_folder/championsdata.csv")
+runners <- read_csv(file = "nba_data_folder/runnerupsdata.csv")
+champs <- champs %>%
+    mutate(Team = ifelse(Team == "Warriorrs","Warriors",Team)) %>%
+    mutate(Team = ifelse(Team == "'Heat'","Heat",Team)) %>%
+    mutate(Win = as.factor(Win)) %>%
+    mutate(Home = as.factor(Home))
+
+runners <- runners %>%
+    mutate(Win = as.factor(Win)) %>%
+    mutate(Home = as.factor(Home))
+all_teams = bind_rows("Champion" = champs, "Runner" = runners, .id = "rank")
+```
+
+```{r}
+champs %>% 
+    select(Team) %>%
+    distinct()
+
+```
+```{r}
+champs$Team
+all_teams %>% 
+  group_by(Home) %>%
+summarize(avg = mean(PTS))
+ggplot(data=all_teams, aes(x=Year, y=TP)) +
+  geom_bar(stat="identity")
+
+```
+

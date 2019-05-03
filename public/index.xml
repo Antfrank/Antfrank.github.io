@@ -36,49 +36,253 @@ Click on the **Slides** button above to view the built-in slides feature.
     </item>
     
     <item>
-      <title>My first post</title>
-      <link>/post/r-markdown/</link>
-      <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/r-markdown/</guid>
-      <description>
-
-
-&lt;div id=&#34;my-first-post&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;My first post&lt;/h1&gt;
-&lt;p&gt;I’m Jane Doe! I’ve recently completed the Chromebook Data Science Course Set on Leanpub.&lt;/p&gt;
-&lt;p&gt;I’m interested in working with data and answering interesting questions&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Welcome!</title>
-      <link>/post/r-markdown/</link>
-      <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/r-markdown/</guid>
-      <description>
-
-
-&lt;div id=&#34;my-first-post&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;My first post&lt;/h1&gt;
-&lt;p&gt;I’m Jane Doe! I’ve recently completed the Chromebook Data Science Course Set on Leanpub.&lt;/p&gt;
-&lt;p&gt;I’m interested in working with data and answering interesting questions&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ATUS Survey Analysis</title>
+      <title>Americans and Time</title>
       <link>/project/atus-survey-analysis/</link>
-      <pubDate>Sat, 30 Mar 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 03 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/project/atus-survey-analysis/</guid>
       <description>
 
 
+&lt;div id=&#34;the-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;The Data&lt;/h3&gt;
+&lt;p&gt;The American Time Use Survey (ATUS) is a time-use survey of Americans, which is sponsored by the Bureau of Labor Statistics (BLS) and conducted by the U.S. Census Bureau. Respondents of the survey are asked to keep a diary for one day carefully recording the amount of time they spend on various activities including working, leisure, childcare, and household activities. The survey has been conducted every year since 2003.&lt;/p&gt;
+&lt;p&gt;Included in the data are main demographic variables such as respondents’ age, sex, race, marital status, and education. The data also includes detailed income and employment information for each respondent. While there are some slight changes to the survey each year, the main questions asked stay the same. You can find the data dictionaries for each year on &lt;a href=&#34;https://www.bls.gov/tus/dictionaries.htm&#34;&gt;https://www.bls.gov/tus/dictionaries.htm&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;accessing-the-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Accessing the Data&lt;/h3&gt;
+&lt;p&gt;There are multiple ways to access the ATUS data; however, for this project, you’ll get the raw data directly from the source. The data for each year can be found at &lt;a href=&#34;https://www.bls.gov/tus/#data&#34;&gt;https://www.bls.gov/tus/#data&lt;/a&gt;. Once there, there is an option of downloading a multi-year file, which includes data for all of the years the survey has been conducted, but &lt;strong&gt;for the purposes of this project, let’s just look at the data for 2016&lt;/strong&gt;. Under &lt;strong&gt;Data Files&lt;/strong&gt;, click on &lt;code&gt;American Time Use Survey--2016 Microdata files&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You will be brought to a new screen. Scroll down to the section &lt;strong&gt;2016 Basic ATUS Data Files&lt;/strong&gt;. Under this section, you’ll want to &lt;strong&gt;click to download&lt;/strong&gt; the following two files: &lt;code&gt;ATUS 2016 Activity summary file (zip)&lt;/code&gt; and &lt;code&gt;ATUS-CPS 2016 file (zip)&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ATUS 2016 Activity summary file (zip)&lt;/code&gt; contains information about the total time each ATUS respondent spent doing each activity listed in the survey. The activity data includes information such as activity codes, activity start and stop times, and locations.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ATUS-CPS 2016 file (zip)&lt;/code&gt; contains information about each household member of all individuals selected to participate in the ATUS.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Once they’ve been downloaded, you’ll need to &lt;strong&gt;unzip the files&lt;/strong&gt;. Once unzipped, you will see the dataset in a number of different file formats including &lt;code&gt;.sas&lt;/code&gt;, &lt;code&gt;.sps&lt;/code&gt;, and &lt;code&gt;.dat&lt;/code&gt; files. &lt;strong&gt;We’ll be working with the .dat files.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;loading-the-data-into-r&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Loading the Data into R&lt;/h3&gt;
+&lt;p&gt;Use the first approach explained above to download and access the ATUS data for 2016. Download the CPS and Activity Summary files in a folder and unzip them and within each folder upload the files ending in .dat to &lt;code&gt;data/raw_data&lt;/code&gt; filder on RStudio.cloud. To load the data in, &lt;strong&gt;run the code in the &lt;code&gt;atus-data&lt;/code&gt; code chunk&lt;/strong&gt; to create an object called &lt;code&gt;atus.all&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;importing-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Importing data&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;atus.cps &amp;lt;- read.delim(&amp;#39;final_project_data/atuscps_2016.dat&amp;#39;, sep=&amp;quot;,&amp;quot;)
+atus.sum &amp;lt;- read.delim(&amp;#39;final_project_data/atussum_2016.dat&amp;#39;, sep=&amp;quot;,&amp;quot;)
+atus.all &amp;lt;- atus.sum %&amp;gt;%
+  left_join(atus.cps %&amp;gt;% filter(TULINENO==1), by = c(&amp;quot;TUCASEID&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;exploratory-analysis-of-child-care-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Exploratory Analysis of Child Care Data&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;atus.all &amp;lt;- atus.all %&amp;gt;% 
+    mutate(CHILDCARE = t030101 + t030102 + t030103 + t030104 + t030105 + t030106 + t030108 + t030109 + t030110 + t030111 + t030112)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(atus.all)+
+  geom_density(aes(CHILDCARE))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./project/final_project_3_files/figure-html/childcare-density-plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;childcare &amp;lt;- atus.all %&amp;gt;%
+    group_by(TESEX) %&amp;gt;%
+    summarize(avg = mean(CHILDCARE))
 
+childcare&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 2 x 2
+##   TESEX   avg
+##   &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt;
+## 1     1  19.0
+## 2     2  33.1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## replace -1 in the variable TRDPFTPT with NA.
+atus.all &amp;lt;- atus.all %&amp;gt;%
+  mutate(TRDPFTPT=na_if(TRDPFTPT,-1))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## add your exploratory analysis code here&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;regression-analysis&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Regression Analysis&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## add your regression analysis code here
+regression &amp;lt;- lm(TRCHILDNUM ~ HEFAMINC, 
+               data=atus.all)
+summary(regression)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Call:
+## lm(formula = TRCHILDNUM ~ HEFAMINC, data = atus.all)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.9681 -0.8149 -0.5466  0.5300  8.2618 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&amp;gt;|t|)    
+## (Intercept) 0.355030   0.030152   11.78   &amp;lt;2e-16 ***
+## HEFAMINC    0.038319   0.002598   14.75   &amp;lt;2e-16 ***
+## ---
+## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
+## 
+## Residual standard error: 1.099 on 10491 degrees of freedom
+## Multiple R-squared:  0.02031,    Adjusted R-squared:  0.02022 
+## F-statistic: 217.5 on 1 and 10491 DF,  p-value: &amp;lt; 2.2e-16&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;exploratory-analysis-of-age-and-activities&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Exploratory Analysis of Age and Activities&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;atus.wide &amp;lt;- atus.all %&amp;gt;%
+    mutate(act01 = rowSums(atus.all[,grep(&amp;quot;t01&amp;quot;, names(atus.all))]),
+           act02 = rowSums(atus.all[,grep(&amp;quot;t02&amp;quot;, names(atus.all))]),
+           act03 = rowSums(atus.all[,grep(&amp;quot;t03&amp;quot;, names(atus.all))]),
+           act04 = rowSums(atus.all[,grep(&amp;quot;t04&amp;quot;, names(atus.all))]),
+           act05 = rowSums(atus.all[,grep(&amp;quot;t05&amp;quot;, names(atus.all))]),
+           act06 = rowSums(atus.all[,grep(&amp;quot;t06&amp;quot;, names(atus.all))]),
+           act07 = rowSums(atus.all[,grep(&amp;quot;t07&amp;quot;, names(atus.all))]),
+           act08 = rowSums(atus.all[,grep(&amp;quot;t08&amp;quot;, names(atus.all))]),
+           act09 = rowSums(atus.all[,grep(&amp;quot;t09&amp;quot;, names(atus.all))]),
+           act10 = rowSums(atus.all[,grep(&amp;quot;t10&amp;quot;, names(atus.all))]),
+           act11 = rowSums(atus.all[,grep(&amp;quot;t11&amp;quot;, names(atus.all))]),
+           act12 = rowSums(atus.all[,grep(&amp;quot;t12&amp;quot;, names(atus.all))]),
+           act13 = rowSums(atus.all[,grep(&amp;quot;t13&amp;quot;, names(atus.all))]),
+           act14 = rowSums(atus.all[,grep(&amp;quot;t14&amp;quot;, names(atus.all))]),
+           act15 = rowSums(atus.all[,grep(&amp;quot;t16&amp;quot;, names(atus.all))]),
+           act16 = rowSums(atus.all[,grep(&amp;quot;t17&amp;quot;, names(atus.all))]),
+           act18 = rowSums(atus.all[,grep(&amp;quot;t18&amp;quot;, names(atus.all))]) ) %&amp;gt;% 
+    select(TUCASEID, TEAGE, HEFAMINC, starts_with(&amp;quot;act&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyr)
+atus.long &amp;lt;- atus.wide %&amp;gt;% 
+  gather(key = ACTIVITY, value = MINS, act01:act18) &lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;atus.long %&amp;gt;% 
+    group_by(ACTIVITY, TEAGE) %&amp;gt;% 
+    summarise(AVGMINS = mean(MINS)) %&amp;gt;% 
+    ggplot(aes(x=TEAGE, y= AVGMINS)) +
+             geom_point() +
+  facet_wrap(~ACTIVITY)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./project/final_project_3_files/figure-html/age-activity-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;exploratory-analysis-of-income-and-activities&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Exploratory Analysis of Income and Activities&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;atus.long %&amp;gt;% 
+    group_by(ACTIVITY, HEFAMINC) %&amp;gt;% 
+    summarise(AVGMINS = mean(MINS)) %&amp;gt;% 
+  ggplot( aes(x = ACTIVITY, y = AVGMINS, fill = HEFAMINC)) + 
+  geom_bar(position = &amp;quot;fill&amp;quot;,stat = &amp;quot;identity&amp;quot;) + 
+  coord_flip()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Removed 16 rows containing missing values (geom_bar).&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./project/final_project_3_files/figure-html/activity-income-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;  ## add the rest of the code here&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## save the plot above
+ggsave(&amp;quot;activity-income.png&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Saving 7 x 5 in image&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Removed 16 rows containing missing values (geom_bar).&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>NBA Stats</title>
+      <link>/project/atus-survey-analysis/</link>
+      <pubDate>Fri, 03 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/project/atus-survey-analysis/</guid>
+      <description>
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;champs %&amp;gt;% 
+    select(Team) %&amp;gt;%
+    distinct()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 11 x 1
+##    Team     
+##    &amp;lt;chr&amp;gt;    
+##  1 Lakers   
+##  2 Celtics  
+##  3 Sixers   
+##  4 Pistons  
+##  5 Bulls    
+##  6 Rockets  
+##  7 Spurs    
+##  8 Heat     
+##  9 Mavericks
+## 10 Warriors 
+## 11 Cavaliers&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;champs$Team&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   [1] &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;   
+##   [6] &amp;quot;Lakers&amp;quot;    &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;  
+##  [11] &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;   &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;   
+##  [16] &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Sixers&amp;quot;    &amp;quot;Sixers&amp;quot;   
+##  [21] &amp;quot;Sixers&amp;quot;    &amp;quot;Sixers&amp;quot;    &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;  
+##  [26] &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;   &amp;quot;Lakers&amp;quot;   
+##  [31] &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;   
+##  [36] &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;  
+##  [41] &amp;quot;Celtics&amp;quot;   &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;   
+##  [46] &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;   
+##  [51] &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Pistons&amp;quot;  
+##  [56] &amp;quot;Pistons&amp;quot;   &amp;quot;Pistons&amp;quot;   &amp;quot;Pistons&amp;quot;   &amp;quot;Pistons&amp;quot;   &amp;quot;Pistons&amp;quot;  
+##  [61] &amp;quot;Pistons&amp;quot;   &amp;quot;Pistons&amp;quot;   &amp;quot;Pistons&amp;quot;   &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;    
+##  [66] &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;    
+##  [71] &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;    
+##  [76] &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;    
+##  [81] &amp;quot;Rockets&amp;quot;   &amp;quot;Rockets&amp;quot;   &amp;quot;Rockets&amp;quot;   &amp;quot;Rockets&amp;quot;   &amp;quot;Rockets&amp;quot;  
+##  [86] &amp;quot;Rockets&amp;quot;   &amp;quot;Rockets&amp;quot;   &amp;quot;Rockets&amp;quot;   &amp;quot;Rockets&amp;quot;   &amp;quot;Rockets&amp;quot;  
+##  [91] &amp;quot;Rockets&amp;quot;   &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;    
+##  [96] &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;    
+## [101] &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;    
+## [106] &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Bulls&amp;quot;     &amp;quot;Spurs&amp;quot;    
+## [111] &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;     &amp;quot;Lakers&amp;quot;   
+## [116] &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;   
+## [121] &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;   
+## [126] &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Spurs&amp;quot;    
+## [131] &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;    
+## [136] &amp;quot;Pistons&amp;quot;   &amp;quot;Pistons&amp;quot;   &amp;quot;Pistons&amp;quot;   &amp;quot;Pistons&amp;quot;   &amp;quot;Pistons&amp;quot;  
+## [141] &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;    
+## [146] &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;     &amp;quot;Heat&amp;quot;      &amp;quot;Heat&amp;quot;      &amp;quot;Heat&amp;quot;     
+## [151] &amp;quot;Heat&amp;quot;      &amp;quot;Heat&amp;quot;      &amp;quot;Heat&amp;quot;      &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;    
+## [156] &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;     &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;  
+## [161] &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;   &amp;quot;Celtics&amp;quot;   &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;   
+## [166] &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;   
+## [171] &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;    &amp;quot;Lakers&amp;quot;   
+## [176] &amp;quot;Mavericks&amp;quot; &amp;quot;Mavericks&amp;quot; &amp;quot;Mavericks&amp;quot; &amp;quot;Mavericks&amp;quot; &amp;quot;Mavericks&amp;quot;
+## [181] &amp;quot;Mavericks&amp;quot; &amp;quot;Heat&amp;quot;      &amp;quot;Heat&amp;quot;      &amp;quot;Heat&amp;quot;      &amp;quot;Heat&amp;quot;     
+## [186] &amp;quot;Heat&amp;quot;      &amp;quot;Heat&amp;quot;      &amp;quot;Heat&amp;quot;      &amp;quot;Heat&amp;quot;      &amp;quot;Heat&amp;quot;     
+## [191] &amp;quot;Heat&amp;quot;      &amp;quot;Heat&amp;quot;      &amp;quot;Heat&amp;quot;      &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;    
+## [196] &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;     &amp;quot;Spurs&amp;quot;     &amp;quot;Warriors&amp;quot;  &amp;quot;Warriors&amp;quot; 
+## [201] &amp;quot;Warriors&amp;quot;  &amp;quot;Warriors&amp;quot;  &amp;quot;Warriors&amp;quot;  &amp;quot;Warriors&amp;quot;  &amp;quot;Cavaliers&amp;quot;
+## [206] &amp;quot;Cavaliers&amp;quot; &amp;quot;Cavaliers&amp;quot; &amp;quot;Cavaliers&amp;quot; &amp;quot;Cavaliers&amp;quot; &amp;quot;Cavaliers&amp;quot;
+## [211] &amp;quot;Cavaliers&amp;quot; &amp;quot;Warriors&amp;quot;  &amp;quot;Warriors&amp;quot;  &amp;quot;Warriors&amp;quot;  &amp;quot;Warriors&amp;quot; 
+## [216] &amp;quot;Warriors&amp;quot;  &amp;quot;Warriors&amp;quot;  &amp;quot;Warriors&amp;quot;  &amp;quot;Warriors&amp;quot;  &amp;quot;Warriors&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;all_teams %&amp;gt;% 
+  group_by(Home) %&amp;gt;%
+summarize(avg = mean(PTS))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 2 x 2
+##   Home    avg
+##   &amp;lt;fct&amp;gt; &amp;lt;dbl&amp;gt;
+## 1 0      96.3
+## 2 1     101.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data=all_teams, aes(x=Year, y=TP)) +
+  geom_bar(stat=&amp;quot;identity&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./project/nba_anaylsis_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>My First Post</title>
+      <link>/post/r-markdown/</link>
+      <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/r-markdown/</guid>
+      <description>
+
+
+&lt;div id=&#34;my-first-post&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;My first post&lt;/h1&gt;
+&lt;p&gt;I’m Jane Doe! I’ve recently completed the Chromebook Data Science Course Set on Leanpub.&lt;/p&gt;
+&lt;p&gt;I’m interested in working with data and answering interesting questions&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>My second Post</title>
+      <link>/post/r-markdown/</link>
+      <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/r-markdown/</guid>
+      <description>
+
+
+&lt;div id=&#34;my-second-post&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;My second post&lt;/h1&gt;
+&lt;p&gt;Chromebook Data Science.&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     
@@ -138,180 +342,7 @@ Click on the **Slides** button above to view the built-in slides feature.
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/slides/example-slides/</guid>
-      <description>
-
-&lt;h1 id=&#34;welcome-to-slides&#34;&gt;Welcome to Slides&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/&#34; target=&#34;_blank&#34;&gt;Academic&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Efficiently write slides in Markdown&lt;/li&gt;
-&lt;li&gt;3-in-1: Create, Present, and Publish your slides&lt;/li&gt;
-&lt;li&gt;Supports speaker notes&lt;/li&gt;
-&lt;li&gt;Mobile friendly slides&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;controls&#34;&gt;Controls&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Next: &lt;code&gt;Right Arrow&lt;/code&gt; or &lt;code&gt;Space&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Previous: &lt;code&gt;Left Arrow&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Start: &lt;code&gt;Home&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Finish: &lt;code&gt;End&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Overview: &lt;code&gt;Esc&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Speaker notes: &lt;code&gt;S&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Fullscreen: &lt;code&gt;F&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Zoom: &lt;code&gt;Alt + Click&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/hakimel/reveal.js#pdf-export&#34; target=&#34;_blank&#34;&gt;PDF Export&lt;/a&gt;: &lt;code&gt;E&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;code-highlighting&#34;&gt;Code Highlighting&lt;/h2&gt;
-
-&lt;p&gt;Inline code: &lt;code&gt;variable&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Code block:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;porridge = &amp;quot;blueberry&amp;quot;
-if porridge == &amp;quot;blueberry&amp;quot;:
-    print(&amp;quot;Eating...&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;math&#34;&gt;Math&lt;/h2&gt;
-
-&lt;p&gt;In-line math: $x + y = z$&lt;/p&gt;
-
-&lt;p&gt;Block math:&lt;/p&gt;
-
-&lt;p&gt;$$
-f\left( x \right) = \;\frac{{2\left( {x + 4} \right)\left( {x - 4} \right)}}{{\left( {x + 4} \right)\left( {x + 1} \right)}}
-$$&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;fragments&#34;&gt;Fragments&lt;/h2&gt;
-
-&lt;p&gt;Make content appear incrementally&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;{{% fragment %}} One {{% /fragment %}}
-{{% fragment %}} **Two** {{% /fragment %}}
-{{% fragment %}} Three {{% /fragment %}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Press &lt;code&gt;Space&lt;/code&gt; to play!&lt;/p&gt;
-
-&lt;p&gt;&lt;span class=&#34;fragment &#34; &gt;
-   One
-&lt;/span&gt;
-&lt;span class=&#34;fragment &#34; &gt;
-   &lt;strong&gt;Two&lt;/strong&gt;
-&lt;/span&gt;
-&lt;span class=&#34;fragment &#34; &gt;
-   Three
-&lt;/span&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;A fragment can accept two optional parameters:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;class&lt;/code&gt;: use a custom style (requires definition in custom CSS)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;weight&lt;/code&gt;: sets the order in which a fragment appears&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;speaker-notes&#34;&gt;Speaker Notes&lt;/h2&gt;
-
-&lt;p&gt;Add speaker notes to your presentation&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{% speaker_note %}}
-- Only the speaker can read these notes
-- Press `S` key to view
-{{% /speaker_note %}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Press the &lt;code&gt;S&lt;/code&gt; key to view the speaker notes!&lt;/p&gt;
-
-&lt;aside class=&#34;notes&#34;&gt;
-  &lt;ul&gt;
-&lt;li&gt;Only the speaker can read these notes&lt;/li&gt;
-&lt;li&gt;Press &lt;code&gt;S&lt;/code&gt; key to view&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/aside&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;black: Black background, white text, blue links (default)&lt;/li&gt;
-&lt;li&gt;white: White background, black text, blue links&lt;/li&gt;
-&lt;li&gt;league: Gray background, white text, blue links&lt;/li&gt;
-&lt;li&gt;beige: Beige background, dark text, brown links&lt;/li&gt;
-&lt;li&gt;sky: Blue background, thin dark text, blue links&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;night: Black background, thick white text, orange links&lt;/li&gt;
-&lt;li&gt;serif: Cappuccino background, gray text, brown links&lt;/li&gt;
-&lt;li&gt;simple: White background, black text, blue links&lt;/li&gt;
-&lt;li&gt;solarized: Cream-colored background, dark green text, blue links&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-
-&lt;section data-noprocess data-shortcode-slide
-  
-      
-      data-background-image=&#34;/img/boards.jpg&#34;
-  &gt;
-
-
-&lt;h2 id=&#34;custom-slide&#34;&gt;Custom Slide&lt;/h2&gt;
-
-&lt;p&gt;Customize the slide style and background&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{&amp;lt; slide background-image=&amp;quot;/img/boards.jpg&amp;quot; &amp;gt;}}
-{{&amp;lt; slide background-color=&amp;quot;#0000FF&amp;quot; &amp;gt;}}
-{{&amp;lt; slide class=&amp;quot;my-style&amp;quot; &amp;gt;}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;custom-css-example&#34;&gt;Custom CSS Example&lt;/h2&gt;
-
-&lt;p&gt;Let&amp;rsquo;s make headers navy colored.&lt;/p&gt;
-
-&lt;p&gt;Create &lt;code&gt;assets/css/reveal_custom.css&lt;/code&gt; with:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;.reveal section h1,
-.reveal section h2,
-.reveal section h3 {
-  color: navy;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&#34;questions&#34;&gt;Questions?&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://discourse.gohugo.io&#34; target=&#34;_blank&#34;&gt;Ask&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description></description>
     </item>
     
   </channel>

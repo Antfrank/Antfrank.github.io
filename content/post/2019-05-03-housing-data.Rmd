@@ -1,0 +1,28 @@
+---
+title: Housing_Data
+author: Anthony Franklin
+date: '2019-05-03'
+slug: housing-data
+categories:
+  - data analysis
+tags:
+  - R
+image:
+  caption: ''
+  focal_point: ''
+---
+
+library(tidyverse)
+housing <- read_csv("data/landdata-states.csv")
+crime_md <- read_csv("data/crime_md.csv")
+
+ggplot(data = housing) + geom_histogram(aes(Home.Value))
+
+housing_states <- housing %>% 
+  filter(State %in% c("MD","TX"))
+## %In means either or   |= means and 
+                 
+ggplot(data = housing_md) + geom_histogram(aes(Home.Value))
+
+ggplot(data = housing_states,) + 
+  geom_point(aes(x = Date, y = Home.Value, color = State))

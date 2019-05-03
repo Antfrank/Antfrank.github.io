@@ -2,7 +2,7 @@
 authors:
 - admin
 bio:   
-education:Bachelors in Sociology
+education: 
   courses:
   - course: Chromebook Data Science
     institution: Leanpub
