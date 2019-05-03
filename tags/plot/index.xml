@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>plot on Anthony Franklin</title>
+    <link>/tags/plot/</link>
+    <description>Recent content in plot on Anthony Franklin</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 May 2019 21:13:14 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/plot/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Welcome</title>
+      <link>/post/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 02 May 2019 21:13:14 -0500</pubDate>
+      
+      <guid>/post/2015-07-23-r-rmarkdown/</guid>
+      <description> Welcome I am an junior data analyst who seeks future education in the data science field. I graduated from Shippensburg University with a bachelors in sociology. I want to add my experience from my degree to gain experience in the data science field about everyday society.
+ </description>
+    </item>
+    
+  </channel>
+</rss>

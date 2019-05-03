@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Anthony Franklin</title>
+    <link>/categories/</link>
+    <description>Recent content in Categories on Anthony Franklin</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+<<<<<<< HEAD:public/categories/index.xml
+    <copyright>Copyright Anthony Franklin {year}</copyright>
+    <lastBuildDate>Fri, 03 May 2019 00:00:00 +0000</lastBuildDate>
+=======
+    <lastBuildDate>Thu, 02 May 2019 21:13:14 -0500</lastBuildDate>
+>>>>>>> ce87853bcd71eaf754730d6414c75e47d5c8b109:categories/index.xml
+    
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>R</title>
+      <link>/categories/r/</link>
+      <pubDate>Thu, 02 May 2019 21:13:14 -0500</pubDate>
+      
+      <guid>/categories/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data analysis</title>
+      <link>/categories/data-analysis/</link>
+<<<<<<< HEAD:public/categories/index.xml
+      <pubDate>Fri, 03 May 2019 00:00:00 +0000</pubDate>
+=======
+      <pubDate>Thu, 02 May 2019 00:00:00 +0000</pubDate>
+>>>>>>> ce87853bcd71eaf754730d6414c75e47d5c8b109:categories/index.xml
+      
+      <guid>/categories/data-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NBA</title>
+      <link>/categories/nba/</link>
+      <pubDate>Thu, 02 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/nba/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
